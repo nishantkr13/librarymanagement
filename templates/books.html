@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Books List - Library Management</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='makebookspretty.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='books.css') }}">
+    
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+        <h2 class="page-title">Books List</h2>
+
+        <ul class="book-list">
+            {% for book in books %}
+                <li class="book-item">
+                    <div class="book-details">
+                        <h3 class="book-title">{{ book.title }}</h3>
+                        <p class="book-author">by {{ book.author }}</p>
+                        <p class="book-category">Category: {{ book.category }}</p>
+                    </div>
+                    <div class="book-actions">
+                        <button class="button borrow-btn" data-toggle="modal" data-target="#borrowModal" data-book-id="{{ book.book_id }}" data-book-title="{{ book.title }}">Borrow</button>
+                        <button class="button remove-btn" data-toggle="modal" data-target="#removeModal" data-book-id="{{ book.book_id }}" data-book-title="{{ book.title }}">Remove</button>
+                    </div>
+                </li>
+            {% else %}
+                <p class="no-books">No books available.</p>
+            {% endfor %}
+        </ul>
+
+        <!-- Back to Home Button -->
+        <div class="back-button-container">
+            <a href="{{ url_for('index') }}" class="button back-btn">Back to Home</a>
+        </div>
+
+        <!-- Borrow Modal -->
+        <div class="modal fade" id="borrowModal" tabindex="-1" role="dialog" aria-labelledby="borrowModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="borrowModalLabel">Confirm Borrowing</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        Are you sure you want to borrow "<span id="bookTitle"></span>"?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <!-- Confirm button will have a dynamic link set by JavaScript -->
+                        <a id="confirmBorrowButton" href="#" class="btn btn-primary">Confirm Borrow</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Remove Modal -->
+        <div class="modal fade" id="removeModal" tabindex="-1" role="dialog" aria-labelledby="removeModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="removeModalLabel">Confirm Removal</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        Are you sure you want to remove "<span id="removeBookTitle"></span>" from the library?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <!-- Confirm button for removal -->
+                        <a id="confirmRemoveButton" href="#" class="btn btn-danger">Confirm Remove</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+</div>
+
+<!-- Bootstrap JS and dependencies -->
+<script src="//code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="//stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<!-- jQuery for handling modal data -->
+<script>
+// jQuery for handling modal data for borrowing
+$('#borrowModal').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget); // Button that triggered the modal
+    var bookId = button.data('book-id'); // Extract info from data-* attributes
+    var bookTitle = button.data('book-title');
+
+    var modal = $(this);
+    modal.find('#bookTitle').text(bookTitle);
+    
+    // Set the confirm button link dynamically for borrowing
+    modal.find('#confirmBorrowButton').attr('href', '{{ url_for("borrow_book_route", book_id=0) }}'.replace('0', bookId));
+});
+
+// jQuery for handling modal data for removing
+$('#removeModal').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget); // Button that triggered the modal
+    var bookId = button.data('book-id'); // Extract info from data-* attributes
+    var bookTitle = button.data('book-title');
+
+    var modal = $(this);
+    modal.find('#removeBookTitle').text(bookTitle);
+    
+    // Set the confirm button link dynamically for removing
+    modal.find('#confirmRemoveButton').attr('href', '{{ url_for("remove_book_route", book_id=0) }}'.replace('0', bookId));
+});
+</script>
+
+</body>
+</html>

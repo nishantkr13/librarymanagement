@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library Management System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+</head>
+<body>
+    <div class="content">
+        <div class="container">
+            <h1 class="title">Welcome to the Library Management System</h1>
+
+            <!-- Links to other functionalities -->
+            <div class="nav-links">
+                <div class="card">
+                    <a href="{{ url_for('view_books') }}" class="button">View Books</a>
+                </div>
+                <div class="card">
+                    <a href="{{ url_for('add_book_route') }}" class="button">Add a Book</a>
+                </div>
+                <div class="card">
+                    <a href="{{ url_for('search_books_route') }}" class="button">Search Books</a>
+                </div>
+                <div class="card">
+                    <a href="{{ url_for('register_user_route') }}" class="button">Register User</a>
+                </div>
+                <div class="card">
+                    <a href="{{ url_for('view_borrowed_books') }}" class="button">View Borrowed Books</a> 
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2024 Nishant's Library Management System. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>

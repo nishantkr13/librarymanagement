@@ -1,0 +1,48 @@
+/* borrowed_books.css */
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4; /* Light gray background */
+}
+
+.container {
+    max-width: 800px; /* Center the container */
+    margin: 50px auto; /* Center vertically and horizontally */
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.page-title {
+    text-align: center;
+    color: #333;
+}
+
+.book-list {
+    list-style-type: none; /* Remove bullet points */
+    padding: 0; /* Remove default padding */
+}
+
+.book-item {
+    padding: 15px;
+    border-bottom: 1px solid #ccc; /* Divider line between books */
+}
+
+.book-item h4 {
+    margin: 0; /* Remove default margin */
+}
+
+.book-item p {
+    margin: 5px 0; /* Space between paragraphs */
+}
+
+.back-button-container {
+    text-align: center; /* Center the button */
+    margin-top: 30px; /* Add space above the button */
+}
+
+/* Button styles for better appearance */
+.btn {
+    margin-top: 10px;
+}

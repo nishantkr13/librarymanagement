@@ -1,0 +1,89 @@
+/* books.css */
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4; /* Light gray background */
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    max-width: 800px; /* Center the container */
+    margin: 0 auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.page-title {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.book-list {
+    list-style-type: none; /* Remove bullet points */
+    padding: 0; /* Remove default padding */
+}
+
+.book-item {
+    display: flex; /* Use flexbox for layout */
+    justify-content: space-between; /* Space between details and actions */
+    align-items: center; /* Center items vertically */
+    padding: 15px;
+    border-bottom: 1px solid #ccc; /* Divider line between books */
+    transition: background-color 0.3s ease; /* Animation for hover effect */
+}
+
+.book-item:hover {
+    background-color: #f9f9f9; /* Light gray on hover */
+}
+
+.book-details {
+    flex-grow: 1; /* Allow details to take available space */
+}
+
+.book-title {
+    font-size: 1.5em;
+    color: #007BFF; /* Primary color for titles */
+}
+
+.book-author,
+.book-category {
+    margin: 5px 0; /* Space between author and category */
+}
+
+.book-actions {
+    display: flex; /* Align buttons in a row */
+}
+
+.button {
+    display: inline-block;
+    padding: 10px 15px;
+    margin-left: 10px;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+/* Button styles for remove and borrow actions... */
+
+.borrow-btn {
+    background-color: #007BFF; /* Bootstrap primary color */
+    color: white;
+}
+
+.borrow-btn:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+/* Back to Home Button Styles */
+
+.back-button-container {
+    text-align: center; /* Center the button */
+    margin-top: 30px; /* Add space above the button */
+}
+
+.back-btn {
+    display: inline-block; /* Make it behave like a button */
+}

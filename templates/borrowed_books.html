@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Borrowed Books - Library Management</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='books.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='borrowed_books.css') }}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h2 class="page-title">Your Borrowed Books</h2>
+
+        {% if borrowed_books %}
+            <ul class="book-list">
+                {% for book in borrowed_books %}
+                    <li class="book-item">
+                        <h4>{{ book.title }}</h4>
+                        <p>by {{ book.author }}</p>
+                        <p>Category: {{ book.category }}</p>
+                        <p>Status: {{ 'Available' if book.available else 'Borrowed' }}</p>
+                        <!-- Remove Button -->
+                        <form action="{{ url_for('remove_borrowed_book', book_id=book.book_id) }}" method="POST" style="display:inline;">
+                            <button type="submit" class="btn btn-danger btn-sm">Remove</button>
+                        </form>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>You have not borrowed any books.</p>
+        {% endif %}
+
+        <!-- Back to Home Button -->
+        <div class="back-button-container">
+            <a href="{{ url_for('index') }}" class="btn btn-secondary">Back to Home</a>
+        </div>
+
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="//code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="//stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

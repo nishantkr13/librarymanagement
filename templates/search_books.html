@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Books - Library Management</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='search_books.css') }}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h2 class="page-title">Search for Books</h2>
+
+        <form method="POST" class="search-form">
+            <div class="input-group mb-3">
+                <input type="text" name="keyword" class="form-control" placeholder="Enter book title or author" required>
+                <div class="input-group-append">
+                    <button class="btn btn-primary" type="submit">Search</button>
+                </div>
+            </div>
+        </form>
+
+        {% if books %}
+            <h3>Search Results:</h3>
+            <ul class="book-list">
+                {% for book in books %}
+                    <li class="book-item">
+                        <h4>{{ book.title }}</h4>
+                        <p>by {{ book.author }}</p>
+                        <p>Category: {{ book.category }}</p>
+                        <p>Status: {{ 'Available' if book.available else 'Borrowed' }}</p>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            {% if request.method == 'POST' %}
+                <p>No books found matching your search.</p>
+            {% endif %}
+        {% endif %}
+
+        <!-- Back to Home Button -->
+        <div class="back-button-container">
+            <a href="{{ url_for('index') }}" class="btn btn-secondary">Back to Home</a>
+        </div>
+
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="//code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="//stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
